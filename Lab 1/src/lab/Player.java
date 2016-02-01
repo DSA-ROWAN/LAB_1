@@ -2,18 +2,7 @@ package lab;
 
 public class Player {
 
-	String[][] frames = {
-			{"X"},
-			{"X"},
-			{"X"},
-			{"X"},
-			{"X"},
-			{"X"},
-			{"X"},
-			{"X"},
-			{"X"},
-			{"3","/","3"}
-			};
+	String[][] frames;
 	int numSpares = 0;
 	int numStrikes = 0;
 	int score = 0;
@@ -33,6 +22,7 @@ public class Player {
 			}
 		}
 		
+		//tenth frame parse
 		String[] frame = frames[frames.length - 1];
 		
 		int bScoreOne = 0;
@@ -69,11 +59,18 @@ public class Player {
 				bScoreThr = 10;
 				numSpares++;
 		}else{
-				bScoreTwo = toInt(frame[1]);
+			bScoreOne = toInt(frame[0]);
+			bScoreTwo = toInt(frame[1]);
 		}
-		
+		//tenth frame parse
 		score += bScoreOne + bScoreTwo + bScoreThr;//#TODO# TRY CATCH
 	}
+	
+	//toInt(String bowlVal)
+	//	parameters: takes one string to be converted to an int
+	//	returns: if the value passed in is 0-9 or X it converts to the appropriate number. 
+	//		Else an error is thrown like "[bowlVal]  is not a valid pin value"
+	//	NOTE: will not convert spare directly i.e. don't pass in a "/"
 	
 	private int toInt(String bowlVal){
 		int val = 0;
@@ -118,7 +115,7 @@ public class Player {
 				bScoreTwo = frames[frameIndex + 2][0];
 				bonus =  toInt(bScoreOne) + toInt(bScoreTwo);
 			}else{
-				bonus =  "/".equals(frames[frameIndex + 1][1]) ? 10 : toInt(frames[frameIndex + 1][0]);//#TODO# TRY CATCH
+				bonus =  "/".equals(frames[frameIndex + 1][1]) ? 10 : toInt(frames[frameIndex + 1][0]);
 			}
 		}
 		numStrikes++;

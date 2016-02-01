@@ -3,17 +3,189 @@ import  java.util.*;
 
 public class Main {
 
-	private static String test = "2\r\n" +
-			"[1,1][2,1]\r\n" + 
-			"[1,2][2,2]\r\n" +
-			"[1,3][2,3]\r\n" +
-			"[1,4][2,4]\r\n" +
-			"[1,5][2,5]\r\n" +
-			"[1,6][2,6]\r\n" +
-			"[1,7][2,7]\r\n" +
-			"[1,8][2,8]\r\n" +
-			"[1,9][2,9]\r\n" +
-			"[X,X,3][1,1]\r\n"; 
+	private static String testSpare = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testStrike = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testStrikeCount = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testSpareCount = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testMax = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testMin = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+	
+	private static String testManyPlayers = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+	
+
+	private static String test10thFrame = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testPlayersWrong = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testToManyPlayers = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testToFewPlayers = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+	
+	private static String testToManyBowls = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+
+	private static String testRand1 = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+	
+
+	private static String testRand2 = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+	
+
+	private static String testRand3 = "2\r\n" +
+			"[0,0][0,0]\r\n" + 
+			"[3,/][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n" +
+			"[0,0][0,0]\r\n"; 
+	
 	
 	
 	public static void main(String[] args) {
@@ -22,11 +194,9 @@ public class Main {
 		//read file into bowler_log
 		
 		
-		Parser prsr = new Parser(test);
+		Parser prsr = new Parser(testSpare);
 		ArrayList<Player> bowlers = prsr.getPlayers();
-		printPlayers(bowlers);		
-		//System.out.println("Done.");
-
+		printPlayers(bowlers);
 	}
 	
 	private static void printPlayers(ArrayList<Player> bowlers){
@@ -46,10 +216,10 @@ public class Main {
 
 //TODO//
 /*
-* Log file read in (Pete) #TODO error checking
-* Player Bowling rules (Pete) #TODO error checking pin
+* Log file read in (Pete)
+* Player Bowling rules (Pete) TODO: Needs 10th frame parse 
 * 
-* Log file parsing (Robert) #TODO regex
+* Log file parsing (Robert) DONE.
 * 
 * error handling (both)
 * construct test cases (both)

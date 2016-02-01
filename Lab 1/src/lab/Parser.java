@@ -9,7 +9,7 @@ public class Parser {
 	
 	ArrayList<Player> plyrs = new ArrayList<Player>();
 	
-	@SuppressWarnings("unused")
+
 	public Parser(String bowler_log){
 		Scanner log_scanner = new Scanner(bowler_log);
 		Scanner line_scanner;
@@ -28,7 +28,7 @@ public class Parser {
 			line_scanner.close();
 
 			//String regex = "\\[(X)\\]|\\[([0-9],[0-9/])\\]|\\[(X,[0-9],[0-9/X])\\]|\\[([0-9],[0-9/],[0-9X])\\]|\\[(X,X,X)\\]";
-			String regex = "\\[(X)\\]|\\[([^X\\[\\],]*?,[^\\X[\\],]*?)\\]|\\[([^\\[\\],]*?,[^\\[\\],]*?,[^\\[\\],]*?)\\]";
+			String regex = "\\[(X)\\]|\\[([^X\\[\\],]*?,[^X\\[\\],]*?)\\]|\\[([^\\[\\],]*?,[^\\[\\],]*?,[^\\[\\],]*?)\\]";
 			String[][][] playerFrames = new String[numBowlers][10][];
 			
 			int currentFrame = 0;
