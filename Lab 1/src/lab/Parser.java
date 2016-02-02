@@ -19,7 +19,7 @@ public class Parser {
 			try{
 				numBowlers = line_scanner.nextInt();
 			}catch(NoSuchElementException excpt){
-				System.out.println("ERROR The number of players on the first line of the log file is incorrect");
+				System.out.println("LOG LINE FORMAT ERROR: The number of players on the first line of the log file is incorrect");
 				log_scanner.close();
 				line_scanner.close();
 				return;
@@ -42,23 +42,35 @@ public class Parser {
 			        	numMatches++;
 			        	if(numMatches <= numBowlers){
 			        		String[] frame = null;
-			        		for(int i = 1; i <= matcher.groupCount(); i++){
+			        		for(int i = 1; i <= matcher.groupCount() & frame == null; i++){
 			        			if(matcher.group(i) != null){
-			        				frame = matcher.group(i).split(",");
-			        				break;
+			        				if(i == 3 & currentFrame != 9){
+			        					System.out.println("LOG LINE FORMAT ERROR: Too many bowls on log file line " + (currentFrame + 2)+". Player " + numMatches);
+			        					frame = new String[]{"0","0"};
+			        				}else if(i == 1 & !"X".equals(matcher.group(i))){
+		        						System.out.println("LOG LINE FORMAT ERROR: Too few bowls on log file line " + (currentFrame + 2)+". Player " + numMatches);
+		        						frame = new String[]{"0","0"};
+		        					}else{
+		        						frame = matcher.group(i).split(",");
+		        					}
 			        			}
 			        		}
 			        		playerFrames[numMatches-1][currentFrame] = frame;
 			        	}else{
-			        		System.out.println("ERROR: Too many players on log file line " + (currentFrame + 2));
+			        		System.out.println("LOG LINE FORMAT ERROR: Too many players on log file line " + (currentFrame + 2));
 			        	}
 			        	
 			        }
 			        if(numMatches <  numBowlers){
-			        	System.out.println("ERROR: Too few players on log file line " + (currentFrame + 2));
+			        	System.out.println("LOG LINE FORMAT ERROR: Too few players on log file line " + (currentFrame + 2));
+			        	
+			        	for(;numMatches < numBowlers; numMatches++){
+			        		playerFrames[numMatches][currentFrame] = new String[]{"0","0"};
+			        	}
+			        	
 			        }
 				}else{
-					System.out.println("ERROR: Too many frames in log file");
+					System.out.println("LOG LINE FORMAT ERROR: Too many frames in log file");
 				}
 				currentFrame++;
 			}
@@ -68,7 +80,7 @@ public class Parser {
 			}
 			
 		}else{
-			System.out.println("ERROR The number of players on the first line of the log file is incorrect");
+			System.out.println("LOG LINE FORMAT ERROR: The number of players on the first line of the log file is incorrect");
 			log_scanner.close();
 			return ;
 		}
@@ -81,17 +93,6 @@ public class Parser {
 		//return player array
 		return plyrs;
 	}
-	
-	/*
-	public Player getPlayer(int playerNumber){
-		
-		//check count of plyers
-		plyrs.size();
-		return plyrs[playerNumber+1];
-		
-		
-	}
-	*/
 	
 
 }

@@ -18,7 +18,13 @@ public class Player {
 			}else{
 				int bowlOne = toInt(frames[i][0]);
 				int bowlTwo = toInt(frames[i][1]);
-				score += bowlOne + bowlTwo;
+			
+				int inc = bowlOne + bowlTwo;
+				if(inc > 9){
+					System.out.println("Frame Value " + inc + " in frame " + (i+1) + " is Illegal");
+					inc = 0;
+				}
+				score += inc;
 			}
 		}
 		
@@ -28,42 +34,56 @@ public class Player {
 		int bScoreOne = 0;
 		int bScoreTwo = 0;
 		int bScoreThr = 0;
-		
-		if("X".equals(frame[0])){
-			bScoreOne = toInt(frame[0]);
-			bScoreTwo = toInt(frame[1]);
-			try{
-				if("/".equals(frame[2])){
-					bScoreTwo = 0;
-					bScoreThr = 10;
-					numSpares++;
-				}else if("X".equals(frame[2])){
-					bScoreThr = 10;
-					numStrikes++;
-				}else{
-					bScoreThr = toInt(frame[2]);
-				}
-			}catch(Exception excpt){
-				bScoreThr = 0;
-				System.out.println("Expecting third value in final frame");
-			}
-			numStrikes++;
-		}else if("/".equals(frame[1])){
-			bScoreOne = toInt(frame[0]);
-			bScoreOne = 0;
-			bScoreTwo = 10;
-			bScoreThr = toInt(frame[2]);
-			numSpares++;
-		}else if("/".equals(frame[1])){
+		try{
+			if("X".equals(frame[0])){
+				numStrikes++;
+				bScoreOne = toInt(frame[0]);
+			}else{
+				bScoreOne = toInt(frame[0]);
+			}	
+			
+			if("X".equals(frame[1])){
+				numStrikes++;
+				bScoreTwo = toInt(frame[1]);
+			}else if("/".equals(frame[1]) & !"X".equals(frame[0])){
+				bScoreOne = 0;
+				bScoreTwo = 10;
+				numSpares++;
+			}else{
+				bScoreTwo = toInt(frame[1]);
+			}	
+			
+			if("X".equals(frame[2])){
+				numStrikes++;
+				bScoreThr = toInt(frame[2]);
+			}else if("/".equals(frame[2]) & (!"X".equals(frame[1]) & !"/".equals(frame[1]))){
 				bScoreTwo = 0;
 				bScoreThr = 10;
 				numSpares++;
-		}else{
-			bScoreOne = toInt(frame[0]);
-			bScoreTwo = toInt(frame[1]);
+			}else{
+				bScoreThr = toInt(frame[2]);
+			}	
+		}catch(ArrayIndexOutOfBoundsException except){
+			switch (except.getMessage()) {
+            case "0":  
+            	bScoreOne = 0;
+            	System.out.println("Not enough Bowls in line 10");
+                     break;
+            case "1":  
+            	bScoreTwo = 0;
+            	System.out.println("Not enough Bowls in line 10");
+                     break;
+            case "2":  
+            	bScoreThr = 0;
+            	if("/".equals(frame[1]) | "X".equals(frame[0])){
+            		System.out.println("Not enough Bowls in line 10");
+            	}
+                     break;
+        }		
+			
 		}
-		//tenth frame parse
-		score += bScoreOne + bScoreTwo + bScoreThr;//#TODO# TRY CATCH
+		
+		score += bScoreOne + bScoreTwo + bScoreThr;
 	}
 	
 	//toInt(String bowlVal)
@@ -76,7 +96,7 @@ public class Player {
 		int val = 0;
 		try{
 			 val = Integer.parseInt(bowlVal);
-			 if(val > 9 || val < 0){
+			 if(val > 9 | val < 0){
 				 throw new NumberFormatException();
 			 }
 			 
@@ -98,8 +118,12 @@ public class Player {
 		
 		if(frameIndex == 8){
 			bScoreOne = frames[frameIndex + 1][0];
-			bScoreTwo = frames[frameIndex + 1][1];
-			
+			try{
+				bScoreTwo = frames[frameIndex + 1][1];
+			}catch(ArrayIndexOutOfBoundsException excpt){
+				System.out.println("Not enough Bowls in line 10");
+				bScoreTwo = "0";
+			}
 			
 			if("/".equals(bScoreTwo)){
 				bScoreTwo = Integer.toString(10 - toInt(bScoreOne));
